@@ -1,78 +1,57 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
-import Card from "@mui/material/Card";
-
-// Soft UI Dashboard React components
-import SoftBox from "components/SoftBox";
+import React, { useEffect, useState } from "react";
+import { listarProductos } from "services/productoService";
 import SoftTypography from "components/SoftTypography";
-
-// Soft UI Dashboard React examples
+import SoftBox from "components/SoftBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import Table from "examples/Tables/Table";
-
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 
 function Tables() {
-  const { columns, rows } = authorsTableData;
-  const { columns: prCols, rows: prRows } = projectsTableData;
+  const [producto, setProducto] = useState([]);
+
+  useEffect(() => {
+    async function listar() {
+      const res = await listarProductos();
+      setProducto(res.data);
+    }
+    listar();
+  }, []);
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <SoftBox py={3}>
-        <SoftBox mb={3}>
-          <Card>
-            <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6">Authors table</SoftTypography>
-            </SoftBox>
-            <SoftBox
-              sx={{
-                "& .MuiTableRow-root:not(:last-child)": {
-                  "& td": {
-                    borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                      `${borderWidth[1]} solid ${borderColor}`,
-                  },
-                },
-              }}
-            >
-              <Table columns={columns} rows={rows} />
-            </SoftBox>
-          </Card>
-        </SoftBox>
-        <Card>
-          <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-            <SoftTypography variant="h6">Projects table</SoftTypography>
-          </SoftBox>
-          <SoftBox
-            sx={{
-              "& .MuiTableRow-root:not(:last-child)": {
-                "& td": {
-                  borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                    `${borderWidth[1]} solid ${borderColor}`,
-                },
-              },
-            }}
-          >
-            <Table columns={prCols} rows={prRows} />
-          </SoftBox>
+
+      <SoftBox py={3} bgcolor="#f5f5f5">
+        <Card elevation={5}>
+
+          <Typography variant="h2" color="black" sx={{ textAlign: "center", marginBottom: 2 }}>
+          {'>>> MENÚ <<<'}
+          </Typography>
+
+
+          <CardContent>
+            <Grid container spacing={2}>
+              {producto.map((prod) => (
+                <Grid key={prod.id} item xs={12} sm={6}>
+                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8 }}>
+                    <h1>{prod.nombre_Producto}</h1>
+                    <p style={{ marginBottom: 8 }}>Precio: ${prod.precio_Producto}</p>
+                    {prod.imagen_Producto && (
+                      <img
+                        src={prod.imagen_Producto}
+                        alt={prod.nombre_Producto}
+                        style={{ maxWidth: "100%", height: "auto", borderRadius: 8 }}
+                      />
+                    )}
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
         </Card>
       </SoftBox>
       <Footer />

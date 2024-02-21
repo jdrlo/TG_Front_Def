@@ -11,14 +11,20 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import curved6 from "assets/images/curved-images/curved14.jpg";
 import { useForm } from "react-hook-form";
 import { crearUsuarios } from "services/usuarioService";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+
+
 
 function SignUp() {
+
+
   const [gender, setGender] = useState("");
   const [relationshipStatus, setRelationshipStatus] = useState("");
   const [questStatus, setQuestStatus] = useState("");
   const { handleSubmit, register, formState: { errors } } = useForm();
   const navigate = useNavigate();
- 
+
 
 
   const handleGenderChange = (event) => setGender(event.target.value);
@@ -55,122 +61,206 @@ function SignUp() {
       <Card>
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={handleSubmit(onSubmit)}>
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Nombre
-              </SoftTypography>
-              <SoftInput
-                type="text"
-                {...register('name', { required: { value: true, message: "Nombre es requerido" } })}
-                error={Boolean(errors.name)}
-                helperText={errors.name?.message}
-              />
-            </SoftBox>
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Apellido
-              </SoftTypography>
-              <SoftInput type="text" {...register('apellido_Usuario', { required: { value: true, message: "Apellido es requerido" } })} />
-            </SoftBox>
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Correo Electrónico
-              </SoftTypography>
-              <SoftInput type="email" {...register('email', { required: { value: true, message: "Correo electrónico es requerido" } })} />
-            </SoftBox>
+            <TextField
+              name="name"
+              label="Nombre"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("name", { required: "Nombre es requerido." })}
+              error={Boolean(errors.name)}
+              helperText={errors.name?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Contraseña
-              </SoftTypography>
-              <SoftInput type="password" {...register('password', { required: { value: true, message: "Contraseña es requerida" }, pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$/ } })} />
-            </SoftBox>
+            <TextField
+              name="apellido_Usuario"
+              label="Apellido"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("apellido_Usuario", { required: "Apellido es requerido." })}
+              error={Boolean(errors.apellido_Usuario)}
+              helperText={errors.apellido_Usuario?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Cédula
-              </SoftTypography>
-              <SoftInput type="text" {...register('cedula', { required: { value: true, message: "Cédula es requerida" }, pattern: { value: /^\d{10}$/ } })} />
-            </SoftBox>
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Teléfono celular
-              </SoftTypography>
-              <SoftInput type="text" {...register('telefono', { required: { value: true, message: "Teléfono es requerido" }, pattern: { value: /^\d{10}$/ } })} />
-            </SoftBox>
+            <TextField
+              name="email"
+              label="Correo Electrónico"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("email", {
+                required: "Correo electrónico es requerido.",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Ingrese un correo electrónico válido.",
+                },
+              })}
+              error={Boolean(errors.correoUsuario)}
+              helperText={errors.email?.message}
+              style={{ marginBottom: '10px' }}
+            />
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Género
-              </SoftTypography>
-              <Select
-                {...register('genero_Usuario', { required: 'Género es requerido' })}
-                value={gender}
-                onChange={handleGenderChange}
-                fullWidth
-                sx={{
-                  "& .MuiSelect-icon": {
-                    color: "red",
-                  },
-                }}
-              >
-                <MenuItem value="Masculino">Masculino</MenuItem>
-                <MenuItem value="Femenino">Femenino</MenuItem>
-                <MenuItem value="Otro">Otro</MenuItem>
-              </Select>
-            </SoftBox>
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Situación Sentimental
-              </SoftTypography>
-              <Select
-                {...register('estado_Civil', { required: 'Género es requerido' })}
-                value={relationshipStatus}
-                onChange={handleRelationshipStatusChange}
-                fullWidth
-                sx={{
-                  "& .MuiSelect-icon": {
-                    color: "red", // Cambia el color a tu preferencia
-                  },
-                }}
+            <TextField
+              name="password"
+              label="Contraseña"
+              variant="standard"
+              fullWidth
+              type="password"
+              defaultValue=" "
+              {...register("password", {
+                required: "Contraseña es requerida.",
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$/,
+                  message: "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.",
+                },
+              })}
+              error={Boolean(errors.contrasena)}
+              helperText={errors.password?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
 
-              >
-                <MenuItem value="Soltero">Soltero</MenuItem>
-                <MenuItem value="Comprometido">Comprometido</MenuItem>
-              </Select>
-            </SoftBox>
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Pregunta de Seguridad
-              </SoftTypography>
-              <Select
-                {...register('pregunta_Seguridad ', { required: 'Género es requerido' })}
-                value={questStatus}
-                onChange={handleQuestChange}
-                fullWidth
-                sx={{
-                  "& .MuiSelect-icon": {
-                    color: "red", // Cambia el color a tu preferencia
-                  },
-                }}
-              >
-                <MenuItem value="Nombre de tu mascota">¿Nombre de tu mascota?</MenuItem>
-                <MenuItem value="Color favorito">¿Color favorito?</MenuItem>
-                <MenuItem value="Colegio donde estudiaste">¿Colegio donde estudiaste?</MenuItem>
-              </Select>
-            </SoftBox>
+            <TextField
+              name="cedula"
+              label="Cédula"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("cedula", {
+                required: "Cédula es requerida.",
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Ingrese una cédula válida de 10 dígitos.",
+                },
+              })}
+              error={Boolean(errors.cedula)}
+              helperText={errors.cedula?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
 
-            <SoftBox mb={2}>
-              <SoftTypography variant="button" fontWeight="regular">
-                Respuesta
-              </SoftTypography>
-              <SoftInput type="text" {...register('respuesta_Seguridad', { required: { value: true, message: "Respuesta es requerida" } })} />
-            </SoftBox>
+
+            <TextField
+              name="telefono"
+              label="Teléfono Celular"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("telefono", {
+                required: "Teléfono celular es requerido.",
+                pattern: {
+                  value: /^[0-9]{10}$/,
+                  message: "Ingrese un número de teléfono celular válido de 10 dígitos.",
+                },
+              })}
+              error={Boolean(errors.telefonoCelular)}
+              helperText={errors.telefonoCelular?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
+
+            <TextField
+              name="genero_Usuario"
+              label="Género"
+              variant="standard"
+              fullWidth
+              select
+              defaultValue=" - - - - - -"
+              {...register("genero_Usuario", { required: "Género es requerido." })}
+              error={Boolean(errors.genero)}
+              helperText={errors.genero?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            >
+              <MenuItem value="" disabled>
+                Seleccione su género
+              </MenuItem>
+              <MenuItem value="Masculino">Masculino</MenuItem>
+              <MenuItem value="Femenino">Femenino</MenuItem>
+              <MenuItem value="Otro">Otro</MenuItem>
+            </TextField>
+
+
+            <TextField
+              name="estado_Civil"
+              label="Situación Sentimental"
+              variant="standard"
+              fullWidth
+              select
+              defaultValue="- - - - - - -"
+              {...register("estado_Civil", { required: "Situación Sentimental es requerida." })}
+              error={Boolean(errors.situacionSentimental)}
+              helperText={errors.situacionSentimental?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            >
+              <MenuItem value="" disabled>
+                Seleccione su situación sentimental
+              </MenuItem>
+              <MenuItem value="soltero">Soltero</MenuItem>
+              <MenuItem value="comprometido">Comprometido</MenuItem>
+            </TextField>
+
+
+            <TextField
+              name="pregunta_Seguridad"
+              label="Pregunta de Seguridad"
+              variant="standard"
+              fullWidth
+              select
+              defaultValue="- - - - - -"
+              {...register("pregunta_Seguridad", { required: "Pregunta de Seguridad es requerida." })}
+              error={Boolean(errors.preguntaSeguridad)}
+              helperText={errors.preguntaSeguridad?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            >
+              <MenuItem value="" disabled>
+                Seleccione su pregunta de seguridad
+              </MenuItem>
+              <MenuItem value="mascota">Nombre de tu mascota</MenuItem>
+              <MenuItem value="color">Color favorito</MenuItem>
+              <MenuItem value="colegio">Colegio donde estudiaste</MenuItem>
+            </TextField>
+
+
+            <TextField
+              name="respuesta_Seguridad"
+              label="respuesta"
+              variant="standard"
+              fullWidth
+              defaultValue=" "
+              {...register("respuesta_Seguridad", { required: "Respuesta es requerido." })}
+              error={Boolean(errors.respuesta_seguridad)}
+              helperText={errors.respuesta_seguridad?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            />
+
+            <TextField
+              name="match"
+              label="¿Deseas de participar del match?"
+              variant="standard"
+              fullWidth
+              select
+              defaultValue="----"
+              {...register("match", { required: "Respuesta es requerida." })}
+              error={Boolean(errors.respuestaSiNo)}
+              helperText={errors.respuestaSiNo?.message}
+              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+            >
+              <MenuItem value="" disabled>
+                Seleccione una respuesta
+              </MenuItem>
+              <MenuItem value="Si">Si</MenuItem>
+              <MenuItem value="No">No</MenuItem>
+            </TextField>
+
+            <Typography variant="body2" color="textSecondary">
+            Esta sección facilita la conexión entre personas que disfrutan del establecimiento. Al participar, ten en cuenta que compartirás algunos datos personales. Sé respetuoso y responsable.
+            </Typography>
+
 
             <SoftBox mt={4} mb={1}>
               <SoftButton variant="gradient" color="dark" fullWidth type="submit">
