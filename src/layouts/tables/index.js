@@ -35,7 +35,7 @@ function Tables() {
 
           <CardContent>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={10}>
               {producto.map((prod) => (
                 <Grid key={prod.id} item xs={12} sm={6}>
                   <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

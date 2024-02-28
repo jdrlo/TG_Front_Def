@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listarEventos } from "services/eventoService"; 
-import SoftTypography from "components/SoftTypography";
 import SoftBox from "components/SoftBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -31,7 +29,7 @@ function dashborard() {
       <SoftBox py={3} bgcolor="#f5f5f5">
         <Card elevation={5}>
           <Typography variant="h2" color="black" sx={{ textAlign: "center", marginBottom: 2 }}>
-            {'>>> EVENTOS <<<'}
+            {'>>>PROXIMOS EVENTOS <<<'}
           </Typography>
           <CardContent>
             <Grid container spacing={2}>
@@ -39,6 +37,7 @@ function dashborard() {
                 <Grid key={evento.id_Foto} item xs={12} sm={6}>
                   <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <p style={{ marginBottom: 8 }}>Precio Palco: ${evento.precio_Palco}</p>
+                    <p style={{ marginBottom: 8 }}>Numero de personas: {evento.cantidad_Personas}</p>
                     {evento.foto && (
                       <img
                         src={evento.foto}
