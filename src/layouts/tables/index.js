@@ -29,28 +29,38 @@ function Tables() {
         <Card elevation={5}>
 
           <Typography variant="h2" color="black" sx={{ textAlign: "center", marginBottom: 2 }}>
-          {'>>> MENÚ <<<'}
+            {'>>> MENÚ <<<'}
           </Typography>
 
 
           <CardContent>
+
             <Grid container spacing={2}>
               {producto.map((prod) => (
                 <Grid key={prod.id} item xs={12} sm={6}>
-                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8 }}>
-                    <h1>{prod.nombre_Producto}</h1>
+                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <h1>{prod.nombre_Producto.charAt(0).toUpperCase() + prod.nombre_Producto.slice(1).toLowerCase()}</h1>
                     <p style={{ marginBottom: 8 }}>Precio: ${prod.precio_Producto}</p>
                     {prod.imagen_Producto && (
                       <img
                         src={prod.imagen_Producto}
                         alt={prod.nombre_Producto}
-                        style={{ maxWidth: "100%", height: "auto", borderRadius: 8 }}
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto",
+                          borderRadius: 8,
+                          // Establecer un tamaño específico para las imágenes
+                          width: "200px", // Ajusta este valor según tus necesidades
+                          height: "200px", // Ajusta este valor según tus necesidades
+                          margin: '0 auto', // Centrar la imagen horizontalmente
+                        }}
                       />
                     )}
                   </Paper>
                 </Grid>
               ))}
             </Grid>
+
           </CardContent>
         </Card>
       </SoftBox>

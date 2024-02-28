@@ -35,7 +35,7 @@ function SignUp() {
     try {
       await crearUsuarios(data);
       navigate('/sign-in');
-      // toast.success('Registro creado con éxito', { position: 'bottom-right' });
+      
     } catch (error) {
       let errorMessage = 'Ocurrió un error al procesar el registro. Por favor, inténtalo de nuevo más tarde.';
 
@@ -48,7 +48,7 @@ function SignUp() {
         console.error('Error en la configuración de la solicitud:', error.message);
         errorMessage = 'Error en la configuración de la solicitud: ' + error.message;
       }
-      // toast.error(errorMessage, { position: 'bottom-right' });
+      
     }
   };
 
@@ -258,7 +258,7 @@ function SignUp() {
             </TextField>
 
             <Typography variant="body2" color="textSecondary">
-            Esta sección facilita la conexión entre personas que disfrutan del establecimiento. Al participar, ten en cuenta que compartirás algunos datos personales. Sé respetuoso y responsable.
+            Match: Esta sección facilita la conexión entre personas que disfrutan del establecimiento. Al participar, ten en cuenta que compartirás algunos datos personales. Sé respetuoso y responsable.
             </Typography>
 
 
