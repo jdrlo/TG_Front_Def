@@ -4,10 +4,9 @@ import { ENPOINTS } from '../utils/general';
 
 // listar todos los eventos
 
-const listarEventos = async (state) => {
+const listarEventos = async () => {
   const url = ENPOINTS.eventos;
-  const request = await axios.get(url);
-  state(request.data);
+  return axios.get(url);
 };
 
 // crear un evento 

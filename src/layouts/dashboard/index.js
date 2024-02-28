@@ -1,59 +1,67 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Card from "@mui/material/Card";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import { useForm } from "react-hook-form";
-import SoftBox from "components/SoftBox";
+import React, { useEffect, useState } from "react";
+import { listarEventos } from "services/eventoService"; 
 import SoftTypography from "components/SoftTypography";
-import SoftInput from "components/SoftInput";
-import SoftButton from "components/SoftButton";
+import SoftBox from "components/SoftBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import { crearReservas } from "services/reservaService";
-import { crearQuejas } from "services/quejasService";
-import TextField from "@mui/material/TextField";
-import { getHeaders } from 'utils/general';
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 
-function Dashboard() {
-  const [carouselImages, setCarouselImages] = useState([
-    "assets/images/123.JPG",
-    "url2.jpg",
-    "url3.jpg",
-  ]);
+function dashborard() {
+  const [eventos, setEventos] = useState([]);
 
-  const navigate = useNavigate();
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  useEffect(() => {
+    async function listar() {
+      try {
+        const res = await listarEventos(); 
+        setEventos(res.data);
+      } catch (error) {
+        console.error("Error al obtener los eventos:", error);
+      }
+    }
+    listar();
+  }, []);
 
   return (
     <DashboardLayout>
-
-      {/* Formulario de Reserva */}
-      <Card>
-        <SoftTypography variant="h5" fontWeight="bold" textAlign="center" mb={2} fontSize="2rem">
-          NIVELES CLUB
-        </SoftTypography>
-
-        <Slider {...settings}>
-        {carouselImages.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Image ${index}`} />
-          </div>
-        ))}
-
-      </Slider>
-      </Card>
+      <SoftBox py={3} bgcolor="#f5f5f5">
+        <Card elevation={5}>
+          <Typography variant="h2" color="black" sx={{ textAlign: "center", marginBottom: 2 }}>
+            {'>>> EVENTOS <<<'}
+          </Typography>
+          <CardContent>
+            <Grid container spacing={2}>
+              {eventos.map((evento) => (
+                <Grid key={evento.id_Foto} item xs={12} sm={6}>
+                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <p style={{ marginBottom: 8 }}>Precio Palco: ${evento.precio_Palco}</p>
+                    {evento.foto && (
+                      <img
+                        src={evento.foto}
+                        style={{
+                          maxWidth: "100%",
+                          height: "auto",
+                          borderRadius: 8,
+                          width: "200px", 
+                          height: "200px", 
+                          margin: '0 auto', 
+                        }}
+                      />
+                    )}
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </CardContent>
+        </Card>
+      </SoftBox>
+      <Footer />
     </DashboardLayout>
   );
 }
 
-export default Dashboard;
+export default dashborard;

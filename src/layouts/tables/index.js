@@ -49,10 +49,9 @@ function Tables() {
                           maxWidth: "100%",
                           height: "auto",
                           borderRadius: 8,
-                          // Establecer un tamaño específico para las imágenes
-                          width: "200px", // Ajusta este valor según tus necesidades
-                          height: "200px", // Ajusta este valor según tus necesidades
-                          margin: '0 auto', // Centrar la imagen horizontalmente
+                          width: "200px", 
+                          height: "200px", 
+                          margin: '0 auto', 
                         }}
                       />
                     )}
