@@ -6,7 +6,7 @@ import { ENPOINTS } from '../utils/general';
 
 const listarEventos = async () => {
   const url = ENPOINTS.eventos;
-  return axios.get(url);
+  return axios.get(url)
 };
 
 // crear un evento 

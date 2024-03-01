@@ -12,6 +12,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import { crearReservas } from "services/reservaService";
 import { crearQuejas } from "services/quejasService";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
 import { getHeaders } from 'utils/general';
 
 
@@ -50,9 +51,9 @@ function Billing() {
     <DashboardLayout>
       {/* Formulario de Reserva */}
       <Card>
-        <SoftTypography variant="h5" fontWeight="bold" textAlign="center" mb={2} fontSize="2rem">
-          Haz tu reserva aquí
-        </SoftTypography>
+        <Typography variant="h2" color="#00CCCC" sx={{ textAlign: "center", marginBottom: 4, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 2 }}>
+          {'>>> Haz tu reserva aquí <<<'}
+        </Typography>
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={handleSubmitReserva(onSubmitReserva)}>
             <SoftBox mb={2}>
@@ -114,9 +115,9 @@ function Billing() {
 
       {/* Formulario de Quejas o Sugerencias */}
       <Card>
-        <SoftTypography variant="h5" fontWeight="bold" textAlign="center" mb={2} fontSize="2rem">
-          Quejas o sugerencias
-        </SoftTypography>
+        <Typography variant="h2" color="#00CCCC" sx={{ textAlign: "center", marginBottom: 4, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 2 }}>
+          {'>>> Quejas o sugerencias <<<'}
+        </Typography>
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={handleSubmitPeticion(onSubmitPeticion)}>
             <SoftBox mb={2}>

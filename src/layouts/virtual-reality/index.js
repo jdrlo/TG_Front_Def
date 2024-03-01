@@ -8,6 +8,7 @@ import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import { crearMusica } from "services/musicaService";
+import { Typography } from "@mui/material";
 import { getHeaders } from 'utils/general';
 
 
@@ -32,9 +33,9 @@ function VirtualReality() {
     <DashboardLayout>
       {/* Formulario de Musica */}
       <Card>
-        <SoftTypography variant="h5" fontWeight="bold" textAlign="center" mb={2} fontSize="2rem">
-          Pide una cancion aqui
-        </SoftTypography>
+        <Typography variant="h2" color="#00CCCC" sx={{ textAlign: "center", marginBottom: 4, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 2 }}>
+          {'>>> Haz tu reserva aquí <<<'}
+        </Typography>
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={handleSubmitMusica(onSubmitMusica)}>
             <SoftBox mb={2}>

@@ -28,7 +28,7 @@ function Tables() {
       <SoftBox py={3} bgcolor="#f5f5f5">
         <Card elevation={5}>
 
-          <Typography variant="h2" color="black" sx={{ textAlign: "center", marginBottom: 2 }}>
+        <Typography variant="h2" color="#00CCCC" sx={{ textAlign: "center", marginBottom: 4, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 2 }}>
             {'>>> MENÚ <<<'}
           </Typography>
 
@@ -38,9 +38,7 @@ function Tables() {
             <Grid container spacing={10}>
               {producto.map((prod) => (
                 <Grid key={prod.id} item xs={12} sm={6}>
-                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h1>{prod.nombre_Producto.charAt(0).toUpperCase() + prod.nombre_Producto.slice(1).toLowerCase()}</h1>
-                    <p style={{ marginBottom: 8 }}>Precio: ${prod.precio_Producto}</p>
+                  <Paper elevation={3} sx={{ p: 2, borderRadius: 8, textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', border: '1px solid #ccc', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)' }}>
                     {prod.imagen_Producto && (
                       <img
                         src={prod.imagen_Producto}
@@ -49,12 +47,17 @@ function Tables() {
                           maxWidth: "100%",
                           height: "auto",
                           borderRadius: 8,
-                          width: "200px", 
-                          height: "200px", 
-                          margin: '0 auto', 
+                          width: "200px",
+                          height: "200px",
+                          margin: '0 auto',
                         }}
                       />
                     )}
+
+                    <h1>{prod.nombre_Producto.charAt(0).toUpperCase() + prod.nombre_Producto.slice(1).toLowerCase()}</h1>
+                    <p style={{ marginBottom: 8, fontWeight: 'bold', fontSize: '1.2em' }}>Precio: ${prod.precio_Producto}</p>
+
+
                   </Paper>
                 </Grid>
               ))}
@@ -64,7 +67,7 @@ function Tables() {
         </Card>
       </SoftBox>
       <Footer />
-    </DashboardLayout>
+    </DashboardLayout >
   );
 }
 
