@@ -30,7 +30,13 @@ const ENPOINTS = {
   quejas: BASE_PATH + 'Sugerencias-Quejas/',
 
   /* login */
-  login: BASE_PATH + 'users/login/'
+  login: BASE_PATH + 'users/login/',
+
+  /* Match */
+  match: BASE_PATH + 'match/',
+
+  /* cliente */
+  cliente: BASE_PATH + 'users/cliente/'
 
 };
 

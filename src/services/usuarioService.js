@@ -10,11 +10,29 @@ const listarUsuarios = async (state) => {
   state(request.data);
 };
 
+
+const crearCliente = async (data) => {
+const url = ENPOINTS.cliente;
+console.log(data)
+try {
+  const response = await axios.post(url, data);
+  return response.data;
+} catch (error) {
+  console.error(error);
+  throw error;
+}
+};
+
+
+
+
+
 // crear un usuario
 
 
 const crearUsuarios = async (data) => {
     const url = ENPOINTS.usuarios;
+    console.log(data)
     try {
       const response = await axios.post(url, data);
       return response.data;
@@ -59,5 +77,6 @@ const eliminarUsuarios = async (state, id) => {
     listarUsuarios,
     crearUsuarios,
     actualizarUsuarios,
-    eliminarUsuarios
+    eliminarUsuarios,
+    crearCliente
   };

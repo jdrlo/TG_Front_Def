@@ -10,7 +10,7 @@ import SoftButton from "components/SoftButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import curved6 from "assets/images/curved-images/curved14.jpg";
 import { useForm } from "react-hook-form";
-import { crearUsuarios } from "services/usuarioService";
+import { crearCliente } from "services/usuarioService";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
@@ -33,9 +33,9 @@ function SignUp() {
 
   const onSubmit = async (data) => {
     try {
-      await crearUsuarios(data);
+      await crearCliente(data);
       navigate('/sign-in');
-      
+
     } catch (error) {
       let errorMessage = 'Ocurrió un error al procesar el registro. Por favor, inténtalo de nuevo más tarde.';
 
@@ -48,7 +48,7 @@ function SignUp() {
         console.error('Error en la configuración de la solicitud:', error.message);
         errorMessage = 'Error en la configuración de la solicitud: ' + error.message;
       }
-      
+
     }
   };
 
@@ -72,7 +72,7 @@ function SignUp() {
               {...register("name", { required: "Nombre es requerido." })}
               error={Boolean(errors.name)}
               helperText={errors.name?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             />
 
             <TextField
@@ -84,7 +84,7 @@ function SignUp() {
               {...register("apellido_Usuario", { required: "Apellido es requerido." })}
               error={Boolean(errors.apellido_Usuario)}
               helperText={errors.apellido_Usuario?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             />
 
 
@@ -123,7 +123,7 @@ function SignUp() {
               })}
               error={Boolean(errors.contrasena)}
               helperText={errors.password?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             />
 
 
@@ -142,7 +142,7 @@ function SignUp() {
               })}
               error={Boolean(errors.cedula)}
               helperText={errors.cedula?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             />
 
 
@@ -161,7 +161,7 @@ function SignUp() {
               })}
               error={Boolean(errors.telefonoCelular)}
               helperText={errors.telefonoCelular?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             />
 
             <TextField
@@ -174,7 +174,7 @@ function SignUp() {
               {...register("genero_Usuario", { required: "Género es requerido." })}
               error={Boolean(errors.genero)}
               helperText={errors.genero?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             >
               <MenuItem value="" disabled>
                 Seleccione su género
@@ -195,13 +195,13 @@ function SignUp() {
               {...register("estado_Civil", { required: "Situación Sentimental es requerida." })}
               error={Boolean(errors.situacionSentimental)}
               helperText={errors.situacionSentimental?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             >
               <MenuItem value="" disabled>
                 Seleccione su situación sentimental
               </MenuItem>
-              <MenuItem value="soltero">Soltero</MenuItem>
-              <MenuItem value="comprometido">Comprometido</MenuItem>
+              <MenuItem value="Soltero">Soltero</MenuItem>
+              <MenuItem value="Comprometido">Comprometido</MenuItem>
             </TextField>
 
 
@@ -215,27 +215,27 @@ function SignUp() {
               {...register("pregunta_Seguridad", { required: "Pregunta de Seguridad es requerida." })}
               error={Boolean(errors.preguntaSeguridad)}
               helperText={errors.preguntaSeguridad?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }}
             >
               <MenuItem value="" disabled>
                 Seleccione su pregunta de seguridad
               </MenuItem>
-              <MenuItem value="mascota">Nombre de tu mascota</MenuItem>
-              <MenuItem value="color">Color favorito</MenuItem>
-              <MenuItem value="colegio">Colegio donde estudiaste</MenuItem>
+              <MenuItem value="nombre de tu mascota">nombre de tu mascota</MenuItem>
+              <MenuItem value="color favorito">color favorito</MenuItem>
+              <MenuItem value="colegio donde estudiaste">colegio donde estudiaste</MenuItem>
             </TextField>
 
 
             <TextField
-              name="respuesta_Seguridad"
+              name="respuesta_Pregunta"
               label="respuesta"
               variant="standard"
               fullWidth
               defaultValue=" "
-              {...register("respuesta_Seguridad", { required: "Respuesta es requerido." })}
-              error={Boolean(errors.respuesta_seguridad)}
-              helperText={errors.respuesta_seguridad?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              {...register("respuesta_Pregunta", { required: "Respuesta es requerido." })}
+              error={Boolean(errors.respuesta_Pregunta)}
+              helperText={errors.respuesta_Pregunta?.message}
+              style={{ marginBottom: '10px' }} 
             />
 
             <TextField
@@ -246,8 +246,8 @@ function SignUp() {
               select
               defaultValue="----"
               {...register("match", { required: "Respuesta es requerida." })}
-              error={Boolean(errors.respuestaSiNo)}
-              helperText={errors.respuestaSiNo?.message}
+              error={Boolean(errors.match)}
+              helperText={errors.match?.message}
               style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
             >
               <MenuItem value="" disabled>
@@ -258,7 +258,7 @@ function SignUp() {
             </TextField>
 
             <Typography variant="body2" color="textSecondary">
-            Match: Esta sección facilita la conexión entre personas que disfrutan del establecimiento. Al participar, ten en cuenta que compartirás algunos datos personales. Sé respetuoso y responsable.
+              Match: Esta sección facilita la conexión entre personas que disfrutan del establecimiento. Al participar, ten en cuenta que compartirás algunos datos personales. Sé respetuoso y responsable.
             </Typography>
 
 
@@ -266,6 +266,8 @@ function SignUp() {
               <SoftButton variant="gradient" color="dark" fullWidth type="submit">
                 Registrarme
               </SoftButton>
+
+
             </SoftBox>
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
