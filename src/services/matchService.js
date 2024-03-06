@@ -5,10 +5,10 @@ import { ENPOINTS } from '../utils/general';
 // lista las personas que estan en el match
 
 
-const listarMatch = async (state) => {
+const listarMatch = async () => {
   const url = ENPOINTS.match;
-  const request = await axios.get(url);
-  state(request.data);
+  return axios.get(url);
+  
 };
 
 
