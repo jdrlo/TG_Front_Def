@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ENPOINTS } from '../utils/general';
 
 
-// listar todos los usuarios
+// listar todos los usuarios para el match
 
 const listarUsuarios = async (state) => {
   const url = ENPOINTS.usuarios;

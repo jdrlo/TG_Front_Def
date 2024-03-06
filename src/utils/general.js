@@ -1,4 +1,4 @@
-const BASE_PATH = 'http://localhost:8000/';
+const BASE_PATH = 'http://127.0.0.1:8000/';
 
 const ENPOINTS = {
  
@@ -33,7 +33,7 @@ const ENPOINTS = {
   login: BASE_PATH + 'users/login/',
 
   /* Match */
-  match: BASE_PATH + 'match/',
+  match: BASE_PATH + 'users/match/',
 
   /* cliente */
   cliente: BASE_PATH + 'users/cliente/'

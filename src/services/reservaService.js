@@ -16,7 +16,7 @@ const listarReserva = async (state) => {
 const crearReservas = async (data) => {
   const url = ENPOINTS.reservas;
  try {
-    const instance = axios.create({baseURL:'http://localhost:8000',headers:getHeaders()})
+    const instance = axios.create({baseURL:'http://localhost:3000',headers:getHeaders()})
     const response = await instance.post('/Reservas/', data);
     return response.data;
   } catch (error) {

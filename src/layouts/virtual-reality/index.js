@@ -34,7 +34,7 @@ function VirtualReality() {
       {/* Formulario de Musica */}
       <Card>
         <Typography variant="h2" color="#00CCCC" sx={{ textAlign: "center", marginBottom: 4, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 2 }}>
-          {'>>> Haz tu reserva aquí <<<'}
+          {'>>> Pide tus canciones aquí. <<<'}
         </Typography>
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={handleSubmitMusica(onSubmitMusica)}>

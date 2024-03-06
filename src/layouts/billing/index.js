@@ -27,7 +27,7 @@ function Billing() {
   const onSubmitReserva = async (data) => {
     try {
       await crearReservas(data);
-      navigate('/sign-in');
+      navigate('/dashboard');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -41,7 +41,7 @@ function Billing() {
   const onSubmitPeticion = async (data) => {
     try {
       await crearQuejas(data);
-      navigate('/sign-in');
+      navigate('/dashboard');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
