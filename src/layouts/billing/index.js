@@ -14,11 +14,10 @@ import { crearQuejas } from "services/quejasService";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { getHeaders } from 'utils/general';
-
+import Alert from '@mui/material/Alert';
 
 function Billing() {
   const navigate = useNavigate();
-
 
   const { handleSubmit: handleSubmitReserva, register: registerReserva, formState: { errors: errorsReserva } } = useForm();
   const [ubicacion, setUbicacion] = useState("");
@@ -27,6 +26,8 @@ function Billing() {
   const onSubmitReserva = async (data) => {
     try {
       await crearReservas(data);
+      // Mostrar mensaje de éxito
+      alert("Reserva creada exitosamente");
       navigate('/dashboard');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -41,6 +42,8 @@ function Billing() {
   const onSubmitPeticion = async (data) => {
     try {
       await crearQuejas(data);
+      // Mostrar mensaje de éxito
+      alert("Peticion creada exitosamente");
       navigate('/dashboard');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -156,8 +159,6 @@ function Billing() {
                 fullWidth
               />
             </SoftBox>
-
-
             <SoftBox mt={4} mb={1}>
               <SoftButton type="submit" variant="gradient" color="info" fullWidth>
                 Enviar peticion

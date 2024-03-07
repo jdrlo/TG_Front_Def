@@ -22,6 +22,7 @@ function VirtualReality() {
   const onSubmitMusica = async (data) => {
     try {
       await crearMusica(data);
+      alert("Canción registrada exitosamente");
       navigate('/dashboard');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
