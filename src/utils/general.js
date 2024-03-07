@@ -36,7 +36,10 @@ const ENPOINTS = {
   match: BASE_PATH + 'users/match/',
 
   /* cliente */
-  cliente: BASE_PATH + 'users/cliente/'
+  cliente: BASE_PATH + 'users/cliente/',
+
+  /* perfil */
+  perfil: BASE_PATH + 'users/perfil/'
 
 };
 

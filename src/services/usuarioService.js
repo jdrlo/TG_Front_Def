@@ -10,6 +10,22 @@ const listarUsuarios = async (state) => {
   state(request.data);
 };
 
+// *******************************************
+
+const listarClientes = async () => {
+  const url = ENPOINTS.perfil;
+  return axios.get(url);
+};
+
+//********************************************* */
+
+
+
+
+
+
+
+
 
 const crearCliente = async (data) => {
 const url = ENPOINTS.cliente;
@@ -78,5 +94,6 @@ const eliminarUsuarios = async (state, id) => {
     crearUsuarios,
     actualizarUsuarios,
     eliminarUsuarios,
-    crearCliente
+    crearCliente,
+    listarClientes
   };
