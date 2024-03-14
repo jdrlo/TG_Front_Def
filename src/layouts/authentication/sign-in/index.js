@@ -19,6 +19,7 @@ function SignIn() {
       const response = await iniciarSesion(data);
       console.log(response)
       localStorage.setItem('token',response.token)
+      localStorage.setItem('id',response.id)
       navigate("/dashboard");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

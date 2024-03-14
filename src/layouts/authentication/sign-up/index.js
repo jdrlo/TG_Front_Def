@@ -248,7 +248,7 @@ function SignUp() {
               {...register("match", { required: "Respuesta es requerida." })}
               error={Boolean(errors.match)}
               helperText={errors.match?.message}
-              style={{ marginBottom: '10px' }} // Ajusta el valor según tus necesidades
+              style={{ marginBottom: '10px' }} 
             >
               <MenuItem value="" disabled>
                 Seleccione una respuesta

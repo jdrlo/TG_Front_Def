@@ -5,25 +5,25 @@ const ENPOINTS = {
   /* Eventos */
   eventos: BASE_PATH + 'Eventos/',
 
-  /* Quote */
+  /* articulos */
   articulos: BASE_PATH + 'Articulos/',
 
-  /* Client */
+  /* musica */
   musica: BASE_PATH + 'Musica/',
 
-  /* Employee */
+  /* usuarios */
   usuarios: BASE_PATH + 'users/create/',
 
-  /* Tools */
+  /* reservas */
   reservas: BASE_PATH + 'Reservas/',
 
-  /* Item */
+  /* pedido mesero */
   pedido_Mesero: BASE_PATH + 'Pedido_Mesero/',
 
-  /* Item */
+  /* pedido bodega */
   pedido_Bodega: BASE_PATH + 'Pedido_Bodega/', 
 
-  /* Item */
+  /* inventario */
   inventario: BASE_PATH + 'Invetario/',   
 
   /* quejasSugerencias */
@@ -43,11 +43,23 @@ const ENPOINTS = {
 
 };
 
+
+
+
+
+
+
 const getHeaders = () => {
-  const token = localStorage.getItem('token')
-  const headers = {'Authorization':`Token ${token}`, 'Content-Type':'application/json'}
-  return headers
-}
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
+
+  const headers = {
+    'Authorization': `Token ${token}`,'Content-Type': 'application/json','User-Id': id
+  };
+
+  console.log(localStorage)
+  return headers;
+};
 
 export {ENPOINTS, BASE_PATH, getHeaders};
 

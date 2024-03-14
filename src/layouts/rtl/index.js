@@ -59,11 +59,12 @@ function VirtualReality() {
                     <p style={{ marginBottom: 8, fontWeight: 'bold', fontSize: '1.2em' }}>Nombre: {matchAleatorio.name}</p>
                     <p style={{ marginBottom: 8, fontWeight: 'bold', fontSize: '1.2em' }}>Apellido: {matchAleatorio.apellido_Usuario}</p>
                     <p style={{ marginBottom: 8, fontWeight: 'bold', fontSize: '1.2em' }}>Teléfono: {matchAleatorio.telefono}</p>
+                    <p style={{ marginBottom: 8, fontWeight: 'bold', fontSize: '1.2em' }}>Estado Civil: {matchAleatorio.estado_Civil}</p>
                     
 
-                    {matchAleatorio.foto_Usuario && (
+                    {matchAleatorio.imagen_Usuario && (
                       <img
-                        src={matchAleatorio.foto_Usuario.url}
+                        src={matchAleatorio.imagen_Usuario}
                         style={{
                           maxWidth: "100%",
                           height: "auto",
