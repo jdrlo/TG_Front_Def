@@ -34,6 +34,7 @@ function SignUp() {
   const onSubmit = async (data) => {
     try {
       await crearCliente(data);
+      alert("Registro creado exitosamente");
       navigate('/sign-in');
 
     } catch (error) {

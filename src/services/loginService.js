@@ -16,10 +16,6 @@ const iniciarSesion = async (data) => {
     }
   };
 
-
-
-
-
   export {
     iniciarSesion
   };

@@ -39,22 +39,16 @@ const ENPOINTS = {
   cliente: BASE_PATH + 'users/cliente/',
 
   /* perfil */
-  perfil: BASE_PATH + 'users/perfil/'
+  perfil: BASE_PATH + 'users/perfil/',
 
 };
-
-
-
-
-
-
 
 const getHeaders = () => {
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('id');
 
   const headers = {
-    'Authorization': `Token ${token}`,'Content-Type': 'application/json','User-Id': id
+    'Authorization': `Token ${token}`,'Content-Type': 'application/json','User-Id': userId
   };
 
   console.log(localStorage)

@@ -11,9 +11,9 @@ const listarClientes = async () => {
     return axios.get(url);
   };
   
-  const actualizarClientes = async (data) => {
+  const actualizarClientes = async (data,id) => {
     try {
-      const url = ENPOINTS.perfil;
+      const url = ENPOINTS.perfil + id + '/';
       const request = await axios.put(url,data);
       return response.data;
     } catch (error) {

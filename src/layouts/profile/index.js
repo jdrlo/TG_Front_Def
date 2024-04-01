@@ -1,4 +1,3 @@
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -13,7 +12,6 @@ import { useForm } from "react-hook-form";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-// Soft UI Dashboard React components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 
@@ -29,16 +27,14 @@ function Overview() {
 
   const idNum = getUserId();
 
-
-
   useEffect(() => {
     async function listar() {
       try {
         const res = await listarClientes();
         setClientes(res.data);
-        const clienteId7 = res.data.find((cliente) => cliente.id_User === idNum);
-        if (clienteId7) {
-          setClienteSeleccionado(clienteId7);
+        const clienteSeleccionado = res.data.find(cliente => cliente.id_User.id === idNum);
+        if (clienteSeleccionado) {
+          setClienteSeleccionado(clienteSeleccionado);
         }
       } catch (error) {
         console.error("Error al obtener los clientes:", error);
@@ -49,7 +45,7 @@ function Overview() {
 
   const onSubmitPeticion = async (data) => {
     try {
-      await actualizarClientes(data);
+      await actualizarClientes(data, idNum);
       alert("Peticion creada exitosamente");
     } catch (error) {
       console.error("Error al actualizar datos:", error);
@@ -60,13 +56,17 @@ function Overview() {
 
   useEffect(() => {
     if (clienteSeleccionado) {
-      setValue("name", clienteSeleccionado.name);
-      setValue("apellido_Usuario", clienteSeleccionado.apellido_Usuario);
-      setValue("cedula", clienteSeleccionado.cedula);
-      setValue("email", clienteSeleccionado.email);
-      setValue("telefono", clienteSeleccionado.telefono);
+      setValue("name", clienteSeleccionado.id_User.name);
+      setValue("apellido_Usuario", clienteSeleccionado.id_User.apellido_Usuario);
+      setValue("cedula", clienteSeleccionado.id_User.cedula);
+      setValue("genero_Usuario", clienteSeleccionado.id_User.genero_Usuario);
+      setValue("email", clienteSeleccionado.id_User.email);
+      setValue("telefono", clienteSeleccionado.id_User.telefono);
       setValue("match", clienteSeleccionado.match);
       setValue("estado_Civil", clienteSeleccionado.estado_Civil);
+      setValue("pregunta_Seguridad", clienteSeleccionado.pregunta_Seguridad);
+      setValue("respuesta_Pregunta", clienteSeleccionado.respuesta_Pregunta);
+      setValue("password", clienteSeleccionado.password)
     }
   }, [clienteSeleccionado, setValue]);
 
@@ -84,25 +84,25 @@ function Overview() {
         <Card>
           <SoftBox pt={2} px={2}>
 
-              <Typography
-                variant="h2"
-                color="#00CCCC"
-                sx={{
-                  textAlign: "center",
-                  marginBottom: 4,
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  letterSpacing: 2,
-                }}
-              >
-                {'>>> PERFIL <<<'}
-              </Typography>
+            <Typography
+              variant="h2"
+              color="#00CCCC"
+              sx={{
+                textAlign: "center",
+                marginBottom: 4,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: 2,
+              }}
+            >
+              {'>>> PERFIL <<<'}
+            </Typography>
 
           </SoftBox>
           <CardContent>
             <Grid container spacing={2}>
               {clienteSeleccionado && (
-                <Grid key={clienteSeleccionado.id_User} item xs={12}>
+                <Grid key={clienteSeleccionado.id_Cliente} item xs={12}>
                   <SoftBox mb={0.5} component="form" role="form" onSubmit={handleSubmitPeticion(onSubmitPeticion)}>
 
                     <Paper
@@ -116,21 +116,6 @@ function Overview() {
                         justifyContent: "center",
                       }}
                     >
-                      {clienteSeleccionado.imagen_Usuario && (
-                        <img
-                          src={clienteSeleccionado.imagen_Usuario}
-                          alt={`Foto de ${clienteSeleccionado.name}`}
-                          style={{
-                            maxWidth: "100%",
-                            height: "auto",
-                            borderRadius: 8,
-                            width: "200px",
-                            height: "200px",
-                            margin: '0 auto',
-                          }}
-                        />
-                      )}
-
                       <TextField
                         name="name"
                         label="Nombre"
@@ -139,6 +124,7 @@ function Overview() {
                         {...register("name", { required: "Nombre es requerido." })}
                         error={Boolean(errors.name)}
                         helperText={errors.name?.message}
+                        defaultValue={clienteSeleccionado.id_User.name}
                         style={{ marginBottom: '10px' }}
                       />
 
@@ -148,16 +134,56 @@ function Overview() {
                         variant="standard"
                         fullWidth
                         {...register("apellido_Usuario", { required: "Apellido es requerido." })}
-                        error={Boolean(errors.name)}
-                        helperText={errors.name?.message}
+                        error={Boolean(errors.apellido_Usuario)}
+                        helperText={errors.apellido_Usuario?.message}
+                        defaultValue={clienteSeleccionado.id_User.apellido_Usuario}
+                        style={{ marginBottom: '10px' }}
+                      />
+
+                      <TextField
+                        name="email"
+                        label="Correo Electrónico (No Modificable)"
+                        variant="standard"
+                        fullWidth
+                        InputProps={{ readOnly: true }}
+                        {...register("email", {
+                          required: "Correo electrónico es requerido.",
+                          pattern: {
+                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                            message: "Ingrese un correo electrónico válido.",
+                          },
+                        })}
+                        error={Boolean(errors.email)}
+                        helperText={errors.email?.message}
+                        defaultValue={clienteSeleccionado.id_User.email}
+                        style={{ marginBottom: '10px' }}
+                      />
+
+                      <TextField
+                        name="password"
+                        label="Contraseña"
+                        variant="standard"
+                        fullWidth
+                        type="password"
+                        {...register("password", {
+                          required: "Contraseña es requerida.",
+                          pattern: {
+                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$/,
+                            message: "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.",
+                          },
+                        })}
+                        error={Boolean(errors.contrasena)}
+                        helperText={errors.password?.message}
+                        defaultValue={clienteSeleccionado.password}
                         style={{ marginBottom: '10px' }}
                       />
 
                       <TextField
                         name="cedula"
-                        label="Cédula"
+                        label="Cédula (No Modificable)"
                         variant="standard"
                         fullWidth
+                        InputProps={{ readOnly: true }}
                         {...register("cedula", {
                           required: "Cédula es requerida.",
                           pattern: {
@@ -167,23 +193,7 @@ function Overview() {
                         })}
                         error={Boolean(errors.cedula)}
                         helperText={errors.cedula?.message}
-                        style={{ marginBottom: '10px' }}
-                      />
-
-                      <TextField
-                        name="email"
-                        label="Correo Electrónico"
-                        variant="standard"
-                        fullWidth
-                        {...register("email", {
-                          required: "Correo electrónico es requerido.",
-                          pattern: {
-                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                            message: "Ingrese un correo electrónico válido.",
-                          },
-                        })}
-                        error={Boolean(errors.correoUsuario)}
-                        helperText={errors.email?.message}
+                        defaultValue={clienteSeleccionado.id_User.cedula}
                         style={{ marginBottom: '10px' }}
                       />
 
@@ -199,40 +209,107 @@ function Overview() {
                             message: "Ingrese un número de teléfono celular válido de 10 dígitos.",
                           },
                         })}
-                        error={Boolean(errors.telefonoCelular)}
-                        helperText={errors.telefonoCelular?.message}
+                        error={Boolean(errors.telefono)}
+                        helperText={errors.telefono?.message}
+                        defaultValue={clienteSeleccionado.id_User.telefono}
                         style={{ marginBottom: '10px' }}
                       />
 
-                      <Select
-                        name="match"
-                        label="Match"
+                      <TextField
+                        name="genero_Usuario"
+                        label="Género (No Modificable)"
                         variant="standard"
                         fullWidth
-                        {...register("match", { required: "Campo es requerido, verifica que tu respuesta sea Si o No." })}
-                        error={Boolean(errors.match)}
-                        helperText={errors.match?.message}
+                        InputProps={{ readOnly: true }}
+                        {...register("genero_Usuario", {
+                          required: "Género es requerido."
+                        })}
+                        error={Boolean(errors.genero)}
+                        helperText={errors.genero?.message}
+                        defaultValue={clienteSeleccionado.id_User.genero_Usuario}
                         style={{ marginBottom: '10px' }}
                       >
-                        <MenuItem value="">Seleccione una respuesta</MenuItem>
-                        <MenuItem value="Si">Si</MenuItem>
-                        <MenuItem value="No">No</MenuItem>
-                      </Select>
+                        <MenuItem value="" disabled>
+                          Seleccione su género
+                        </MenuItem>
+                        <MenuItem value="Masculino">Masculino</MenuItem>
+                        <MenuItem value="Femenino">Femenino</MenuItem>
+                        <MenuItem value="Otro">Otro</MenuItem>
+                      </TextField>
 
-                      <Select
+                      <TextField
                         name="estado_Civil"
-                        label="Estado Civil"
+                        label="Situación Sentimental"
                         variant="standard"
                         fullWidth
-                        {...register("estado_Civil", { required: "Campo es requerido, verifica que tu respuesta sea Soltero o Comprometido." })}
+                        {...register("estado_Civil", {
+                          required: "Campo es requerido, verifica que tu respuesta sea Soltero o Comprometido.",
+                          validate: value => ["soltero", "comprometido"].includes(value.toLowerCase()) || "Sólo se permiten 'Soltero' o 'Comprometido'."
+                        })}
                         error={Boolean(errors.estado_Civil)}
                         helperText={errors.estado_Civil?.message}
+                        defaultValue={clienteSeleccionado.estado_Civil}
                         style={{ marginBottom: '10px' }}
                       >
                         <MenuItem value="">Seleccione una respuesta</MenuItem>
                         <MenuItem value="Soltero">Soltero</MenuItem>
                         <MenuItem value="Comprometido">Comprometido</MenuItem>
-                      </Select>
+                      </TextField>
+
+
+                      <TextField
+                        name="pregunta_Seguridad"
+                        label="Pregunta de Seguridad (No Modificable)"
+                        variant="standard"
+                        fullWidth
+                        InputProps={{ readOnly: true }}
+                        {...register("pregunta_Seguridad", { required: "Pregunta de Seguridad es requerida." })}
+                        error={Boolean(errors.preguntaSeguridad)}
+                        helperText={errors.preguntaSeguridad?.message}
+                        defaultValue={clienteSeleccionado.pregunta_Seguridad}
+                        style={{ marginBottom: '10px' }}
+                      >
+                        <MenuItem value="" disabled>
+                          Seleccione su pregunta de seguridad
+                        </MenuItem>
+                        <MenuItem value="nombre de tu mascota">nombre de tu mascota</MenuItem>
+                        <MenuItem value="color favorito">color favorito</MenuItem>
+                        <MenuItem value="colegio donde estudiaste">colegio donde estudiaste</MenuItem>
+                      </TextField>
+
+                      <TextField
+                        name="respuesta_Pregunta"
+                        label="respuesta (No Modificable)"
+                        variant="standard"
+                        fullWidth
+                        InputProps={{ readOnly: true }}
+                        {...register("respuesta_Pregunta", { required: "Respuesta es requerido." })}
+                        error={Boolean(errors.respuesta_Pregunta)}
+                        helperText={errors.respuesta_Pregunta?.message}
+                        defaultValue={clienteSeleccionado.respuesta_Pregunta}
+                        style={{ marginBottom: '10px' }}
+                      />
+
+
+                      <TextField
+                        name="match"
+                        label="¿Deseas de participar del match?"
+                        variant="standard"
+                        fullWidth
+                        {...register("match", { required: "Respuesta es requerida." })}
+                        error={Boolean(errors.match)}
+                        helperText={errors.match?.message}
+                        defaultValue={clienteSeleccionado.match}
+                        style={{ marginBottom: '10px' }}
+                      >
+                        <MenuItem value="" disabled>
+                          Seleccione una respuesta
+                        </MenuItem>
+                        <MenuItem value="Si">Si</MenuItem>
+                        <MenuItem value="No">No</MenuItem>
+                      </TextField>
+
+
 
                       <SoftButton type="submit" variant="gradient" color="info" fullWidth>
                         Modificar datos
