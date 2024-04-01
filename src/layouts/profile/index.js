@@ -46,7 +46,7 @@ function Overview() {
   const onSubmitPeticion = async (data) => {
     try {
       await actualizarClientes(data, idNum);
-      alert("Peticion creada exitosamente");
+      alert("Ha actualizado los datos correctamente");
     } catch (error) {
       console.error("Error al actualizar datos:", error);
     }
@@ -156,25 +156,6 @@ function Overview() {
                         error={Boolean(errors.email)}
                         helperText={errors.email?.message}
                         defaultValue={clienteSeleccionado.id_User.email}
-                        style={{ marginBottom: '10px' }}
-                      />
-
-                      <TextField
-                        name="password"
-                        label="Contraseña"
-                        variant="standard"
-                        fullWidth
-                        type="password"
-                        {...register("password", {
-                          required: "Contraseña es requerida.",
-                          pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}$/,
-                            message: "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula, un número y un carácter especial.",
-                          },
-                        })}
-                        error={Boolean(errors.contrasena)}
-                        helperText={errors.password?.message}
-                        defaultValue={clienteSeleccionado.password}
                         style={{ marginBottom: '10px' }}
                       />
 

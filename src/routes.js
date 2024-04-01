@@ -113,6 +113,15 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Cerrar Sesion",
+    key: "sign-up",
+    route: "/authentication/sign-up",
+    icon: <SpaceShip size="12px" />,
+    component: <SignUp />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
     name: "Iniciar Sesion",
     key: "sign-in",
     route: "/authentication/sign-in",
@@ -120,15 +129,7 @@ const routes = [
     component: <SignIn />,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    route: "/authentication/sign-up",
-    icon: <SpaceShip size="12px" />,
-    component: <SignUp />,
-    noCollapse: true,
-  },
+
 ];
 
 export default routes;
