@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
@@ -26,6 +27,7 @@ function Overview() {
   };
 
   const idNum = getUserId();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function listar() {
@@ -47,6 +49,7 @@ function Overview() {
     try {
       await actualizarClientes(data, idNum);
       alert("Ha actualizado los datos correctamente");
+      navigate('/dashboard');
     } catch (error) {
       console.error("Error al actualizar datos:", error);
     }
